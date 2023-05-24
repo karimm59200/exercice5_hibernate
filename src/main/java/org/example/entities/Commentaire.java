@@ -14,7 +14,7 @@ public class Commentaire {
     private int note;
 
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name="produit_id")
     private Produit produit;
 

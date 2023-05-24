@@ -7,6 +7,7 @@ import org.example.services.ImageService;
 import org.example.services.ProduitService;
 
 import javax.xml.crypto.Data;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -274,6 +275,7 @@ public class Ihm {
             Image image = new Image();
             image.setUrl(chemin);
           //  p.getImages().add(image);
+            image.setProduit(p);
             p.setId(id);
             p.addImage(image);
 
@@ -288,13 +290,21 @@ public class Ihm {
 
     }
 
-    private void addComentaireToProduit(){
+    private void addComentaireToProduit() throws ParseException {
         System.out.println("Merci de saisir l'id du produit : ");
         int id = scanner.nextInt();
         scanner.nextLine();
         Produit p = produitService.findById(id);
         System.out.println("Merci de saisir le commentaire : ");
         String commentaire = scanner.nextLine();
+        System.out.println("Merci d'entrer la date");
+        String dateStr = scanner.nextLine();
+
+
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateStr);
+
+
+
         try {
             p.getCommentaires().add(new Commentaire(commentaire));
             produitService.update(p);
